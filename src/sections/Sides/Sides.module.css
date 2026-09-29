@@ -1,0 +1,209 @@
+.sides {
+  background: var(--surface-app);
+}
+
+.split {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+
+.panel {
+  --accent: var(--teal-500);
+  --accent-text: var(--teal-700);
+  --tint: var(--teal-100);
+
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+  padding: clamp(1.75rem, 1rem + 3vw, 3rem);
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition: box-shadow var(--dur-slow) var(--ease-out);
+}
+
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(120% 90% at 50% 110%, var(--tint), transparent 60%);
+  opacity: 0.7;
+  transition: opacity var(--dur-slow) var(--ease-out);
+}
+
+.renter {
+  --accent: var(--green-500);
+  --accent-text: var(--green-700);
+  --tint: var(--green-100);
+}
+
+.watermark {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  top: -28px;
+  inset-inline-end: -28px;
+  color: var(--accent);
+  opacity: 0.07;
+  transition:
+    transform var(--dur-slow) var(--ease-out),
+    opacity var(--dur-slow) var(--ease-out);
+}
+
+/* ── Copy ───────────────────────────────────────────────── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: var(--radius-pill);
+  background: var(--tint);
+  color: var(--accent-text);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+}
+
+.title {
+  color: var(--ink-900);
+  font-size: var(--fs-h3);
+  line-height: 1.4;
+}
+
+.text {
+  color: var(--color-text-body);
+  font-size: var(--fs-body);
+}
+
+.points {
+  display: grid;
+  gap: var(--space-3);
+  margin-block: var(--space-2);
+}
+
+.point {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: var(--ink-700);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+.check {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 22px;
+  height: 22px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+.renter .check {
+  color: var(--ink-900);
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  margin-top: var(--space-1);
+  color: var(--accent-text);
+  font-weight: var(--fw-bold);
+  border-radius: var(--radius-sm);
+}
+
+.linkIcon {
+  transition: translate var(--dur-base) var(--ease-out);
+}
+
+.link:hover .linkIcon {
+  translate: calc(4px * var(--forward)) 0;
+}
+
+/* ── Visual ─────────────────────────────────────────────── */
+.visual {
+  display: flex;
+  justify-content: center;
+}
+
+.device {
+  --phone-w: clamp(200px, 52vw, 236px);
+  transform: rotate(var(--tilt, -3deg));
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.renter .device {
+  --tilt: 3deg;
+}
+
+/* ── Interaction: the hovered side comes forward ────────── */
+@media (hover: hover) {
+  .panel:hover,
+  .panel:focus-within {
+    box-shadow: inset 0 0 0 1px var(--line), var(--shadow-lg);
+  }
+
+  .panel:hover::before,
+  .panel:focus-within::before {
+    opacity: 1;
+  }
+
+  .panel:hover .device,
+  .panel:focus-within .device {
+    transform: translateY(-14px) rotate(0deg);
+  }
+
+  .panel:hover .watermark {
+    opacity: 0.12;
+    transform: rotate(-8deg) scale(1.05);
+  }
+}
+
+/* Tablet: copy beside the phone inside each panel */
+@media (min-width: 640px) {
+  .panel {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .watermark {
+    display: block;
+  }
+
+  .device {
+    --phone-w: clamp(200px, 26vw, 236px);
+  }
+}
+
+/* Wide desktop: the two panels sit side by side as one diptych */
+@media (min-width: 1200px) {
+  .split {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .device {
+    --phone-w: 212px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .device,
+  .panel:hover .device {
+    transform: none;
+  }
+}

@@ -1,0 +1,390 @@
+.page {
+  background:
+    radial-gradient(40% 50% at 8% 70%, rgb(0 206 103 / 0.06), transparent 70%),
+    #fff;
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-10);
+  padding-block: clamp(2.5rem, 1.5rem + 4vw, 5rem) var(--section-pad);
+}
+
+/* Phones: the form comes first, direct channels follow */
+.aside {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+  order: 2;
+}
+
+/* ── Direct channels ────────────────────────────────────── */
+.channelsTitle {
+  margin-bottom: var(--space-4);
+  color: var(--ink-900);
+  font-size: 1.25rem;
+}
+
+.channels {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4);
+  border-radius: var(--radius-xl);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line);
+  transition:
+    box-shadow var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.channel:hover {
+  transform: translateY(-2px);
+  box-shadow: inset 0 0 0 1.5px var(--teal-200), var(--shadow-md);
+}
+
+.channelIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--teal-100);
+  color: var(--teal-700);
+}
+
+.channelWhatsapp .channelIcon {
+  background: #25d366;
+  color: #fff;
+}
+
+.channelText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.channelLabel {
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.channelValue {
+  color: var(--ink-900);
+  font-size: 1.0625rem;
+  font-weight: var(--fw-bold);
+  overflow-wrap: anywhere;
+}
+
+.channelArrow {
+  margin-inline-start: auto;
+  color: var(--ink-400);
+  transition: translate var(--dur-base) var(--ease-out);
+}
+
+.channel:hover .channelArrow {
+  color: var(--teal-700);
+  translate: calc(4px * var(--forward)) 0;
+}
+
+/* ── 3-step hint ────────────────────────────────────────── */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.step {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px 14px 6px 8px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line);
+  color: var(--ink-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.stepIndex {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--teal-500);
+  color: #fff;
+  font-size: var(--fs-xs);
+}
+
+/* ── Live message preview ───────────────────────────────── */
+/* The live preview sits beside the form on desktop; on phones the form stays short */
+.previewWrap {
+  display: none;
+  max-width: 28rem;
+}
+
+.preview {
+  padding: var(--space-4);
+  border-radius: var(--radius-2xl);
+  background:
+    radial-gradient(rgb(0 136 136 / 0.08) 1px, transparent 1.4px) 0 0 / 18px 18px,
+    var(--teal-25);
+  box-shadow: inset 0 0 0 1px var(--teal-150);
+}
+
+.previewHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.previewAvatar {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: var(--gradient-brand);
+}
+
+.previewLogo {
+  width: 24px;
+  height: auto;
+  color: #fff;
+}
+
+.previewName {
+  color: var(--ink-900);
+  font-weight: var(--fw-bold);
+}
+
+.previewLabel {
+  margin-inline-start: auto;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.bubble {
+  position: relative;
+  width: fit-content;
+  max-width: 100%;
+  padding: var(--space-3) var(--space-4) var(--space-2);
+  border-radius: 18px;
+  border-end-end-radius: 6px;
+  background: var(--green-100);
+  box-shadow: 0 8px 20px -14px rgb(0 100 60 / 0.5);
+}
+
+.bubble[data-empty] .bubbleText {
+  color: var(--ink-500);
+}
+
+.bubbleText {
+  color: var(--ink-900);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.bubbleMeta {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-top: 2px;
+  color: var(--green-700);
+  font-size: 0.6875rem;
+}
+
+/* ── Form card ──────────────────────────────────────────── */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding: clamp(1.25rem, 0.75rem + 2.5vw, 2.5rem);
+  border-radius: var(--radius-2xl);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-lg);
+}
+
+.formTitle {
+  color: var(--ink-900);
+  font-size: 1.25rem;
+}
+
+.fields {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.label {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--ink-900);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.optional {
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-regular);
+}
+
+.control {
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 16px;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface-app);
+  color: var(--ink-900);
+  font-size: 1rem;
+  line-height: 1.6;
+  transition:
+    border-color var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.control::placeholder {
+  color: var(--ink-400);
+}
+
+.control[dir='ltr'] {
+  text-align: right;
+}
+
+textarea.control {
+  min-height: 128px;
+  resize: vertical;
+}
+
+.control:hover {
+  border-color: var(--teal-300);
+}
+
+.control:focus {
+  outline: none;
+  border-color: var(--teal-500);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgb(0 165 165 / 0.16);
+}
+
+.fieldInvalid .control {
+  border-color: #d9534f;
+  background: #fffafa;
+}
+
+.fieldInvalid .control:focus {
+  box-shadow: 0 0 0 4px rgb(217 83 79 / 0.15);
+}
+
+.error {
+  color: #b42318;
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-medium);
+}
+
+.submit {
+  margin-top: var(--space-1);
+}
+
+.status:empty {
+  display: none;
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+.notice svg {
+  flex: none;
+  margin-top: 4px;
+}
+
+.noticeSuccess {
+  background: var(--green-50);
+  color: var(--green-700);
+}
+
+.noticeWarning {
+  background: #fff8e6;
+  color: #6b4e00;
+}
+
+.noticeLink {
+  font-weight: var(--fw-bold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.privacy {
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  line-height: 1.8;
+}
+
+.privacyLink {
+  color: var(--teal-700);
+  font-weight: var(--fw-semibold);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (min-width: 640px) {
+  .fields {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .full {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: clamp(3rem, 6vw, 6rem);
+    align-items: start;
+  }
+
+  .aside {
+    position: sticky;
+    top: calc(var(--header-h) + 32px);
+    order: 0;
+  }
+
+  .previewWrap {
+    display: block;
+  }
+}

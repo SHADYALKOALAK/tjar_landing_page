@@ -1,0 +1,58 @@
+.badges {
+  --badge-h: 48px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.sm {
+  --badge-h: 42px;
+}
+
+.md {
+  --badge-h: clamp(44px, 12vw, 50px);
+}
+
+.lg {
+  --badge-h: clamp(48px, 13vw, 56px);
+}
+
+.stack {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.item {
+  display: flex;
+}
+
+.badge {
+  display: block;
+  border-radius: calc(var(--badge-h) * 0.2);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+
+a.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px -12px rgb(0 0 0 / 0.55);
+}
+
+a.badge:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.badge[data-placeholder] {
+  cursor: default;
+}
+
+/* Official artwork, displayed as-is at a shared height */
+.image {
+  width: auto;
+  height: var(--badge-h);
+  max-width: none;
+}

@@ -1,0 +1,174 @@
+.backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background: linear-gradient(180deg, var(--teal-25) 0%, #fff 82%);
+  pointer-events: none;
+}
+
+/* ── Slow brand light ───────────────────────────────────── */
+.light {
+  position: absolute;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  will-change: transform;
+}
+
+/* Teal light sits behind the phones (reading end), green toward the copy. */
+.lightTeal {
+  top: -18%;
+  inset-inline-end: -12%;
+  width: max(520px, 52vw);
+  background: radial-gradient(circle, rgb(0 165 165 / 0.2), transparent 64%);
+  animation: drift-a 19s var(--ease-in-out) infinite alternate;
+}
+
+.lightGreen {
+  inset-inline-start: -14%;
+  bottom: -26%;
+  width: max(440px, 42vw);
+  background: radial-gradient(circle, rgb(0 206 103 / 0.16), transparent 64%);
+  animation: drift-b 23s var(--ease-in-out) infinite alternate;
+}
+
+.lightMint {
+  top: 8%;
+  inset-inline-start: 18%;
+  width: max(300px, 26vw);
+  background: radial-gradient(circle, rgb(0 165 165 / 0.1), transparent 66%);
+  animation: drift-c 16s var(--ease-in-out) infinite alternate;
+}
+
+@keyframes drift-a {
+  to {
+    transform: translate3d(14%, 12%, 0) scale(1.12);
+  }
+}
+
+@keyframes drift-b {
+  to {
+    transform: translate3d(-16%, -14%, 0) scale(1.18);
+  }
+}
+
+@keyframes drift-c {
+  to {
+    transform: translate3d(-20%, 18%, 0) scale(0.9);
+  }
+}
+
+/* ── Drifting dot grid (the app's onboarding texture) ───── */
+.dotsFrame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  mask-image: radial-gradient(ellipse 60% 60% at 26% 50%, #000 5%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 26% 50%, #000 5%, transparent 75%);
+}
+
+.dots {
+  position: absolute;
+  inset: -22px 0 0 -22px;
+  background-image: radial-gradient(rgb(0 136 136 / 0.18) 1.1px, transparent 1.6px);
+  background-size: 22px 22px;
+  animation: dots 9s linear infinite;
+  will-change: transform;
+}
+
+@keyframes dots {
+  to {
+    transform: translate3d(22px, 22px, 0);
+  }
+}
+
+/* ── Orbit rings behind the phones ──────────────────────── */
+.orbit {
+  position: absolute;
+  top: 74%;
+  left: 50%;
+  width: min(760px, 150vw);
+  aspect-ratio: 1;
+  border: 1.5px dashed rgb(0 165 165 / 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: spin 90s linear infinite;
+}
+
+.orbit::before,
+.orbitInner::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 0 5px rgb(0 206 103 / 0.16);
+  transform: translateX(-50%);
+}
+
+.orbitInner {
+  position: absolute;
+  inset: 17%;
+  border: 1px solid rgb(0 165 165 / 0.14);
+  border-radius: 50%;
+  animation: spin 60s linear infinite reverse;
+}
+
+.orbitInner::before {
+  top: auto;
+  bottom: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--teal-500);
+  box-shadow: 0 0 0 4px rgb(0 165 165 / 0.14);
+}
+
+@keyframes spin {
+  from {
+    rotate: 0deg;
+  }
+
+  to {
+    rotate: 360deg;
+  }
+}
+
+/* ── Pointer glow (desktop) ─────────────────────────────── */
+.glow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(0 165 165 / 0.14), rgb(0 206 103 / 0.05) 40%, transparent 68%);
+}
+
+@media (min-width: 1024px) {
+  .orbit {
+    top: 56%;
+    left: 27%;
+  }
+
+  :global(html[dir='ltr']) .orbit {
+    left: 73%;
+  }
+}
+
+:global(html[dir='ltr']) .dotsFrame {
+  mask-image: radial-gradient(ellipse 60% 60% at 74% 50%, #000 5%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at 74% 50%, #000 5%, transparent 75%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .light,
+  .dots,
+  .orbit,
+  .orbitInner {
+    animation: none;
+  }
+}

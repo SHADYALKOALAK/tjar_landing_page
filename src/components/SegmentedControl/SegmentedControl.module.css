@@ -1,0 +1,48 @@
+.control {
+  display: inline-grid;
+  grid-auto-columns: 1fr;
+  grid-auto-flow: column;
+  gap: 4px;
+  padding: 5px;
+  border-radius: var(--radius-pill);
+  background: var(--surface);
+  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-sm);
+}
+
+.tab {
+  position: relative;
+  min-height: 46px;
+  padding-inline: var(--space-6);
+  border-radius: var(--radius-pill);
+  color: var(--ink-600);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.tab:hover {
+  color: var(--teal-700);
+}
+
+.tab[aria-selected='true'] {
+  color: #fff;
+}
+
+.indicator {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--btn-primary-bg);
+  box-shadow: 0 8px 18px -8px rgb(0 136 136 / 0.7);
+}
+
+.label {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}

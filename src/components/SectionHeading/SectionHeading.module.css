@@ -1,0 +1,61 @@
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  max-width: 44rem;
+}
+
+.center {
+  align-items: center;
+  margin-inline: auto;
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: fit-content;
+  padding: 6px 14px 6px 16px;
+  border-radius: var(--radius-pill);
+  background: var(--teal-100);
+  color: var(--teal-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 0 3px rgb(0 206 103 / 0.18);
+}
+
+.title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+  color: var(--ink-900);
+}
+
+.lead {
+  max-width: 36rem;
+  font-size: var(--fs-lead);
+  line-height: 1.8;
+  color: var(--color-text-body);
+}
+
+/* Inverse (on dark teal) */
+.inverse .eyebrow {
+  background: rgb(255 255 255 / 0.12);
+  color: #fff;
+}
+
+.inverse .title {
+  color: #fff;
+}
+
+.inverse .lead {
+  color: rgb(255 255 255 / 0.84);
+}

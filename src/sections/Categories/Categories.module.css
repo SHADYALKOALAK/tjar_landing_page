@@ -1,0 +1,174 @@
+.categories {
+  overflow: hidden;
+  background: var(--surface-app);
+}
+
+.rows {
+  display: grid;
+  gap: var(--space-4);
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+}
+
+/* ── Marquee ─────────────────────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee:hover .track {
+  animation-play-state: paused;
+}
+
+/* The track overflows toward the reading end; moving it back by one group loops seamlessly
+   (RTL: +50%, LTR: -50%). */
+.track {
+  display: flex;
+  width: max-content;
+  animation: marquee var(--duration) linear infinite;
+}
+
+.reverse {
+  animation-direction: reverse;
+}
+
+.group,
+.set {
+  display: flex;
+  flex: none;
+}
+
+.set {
+  gap: var(--space-4);
+  padding-inline-end: var(--space-4);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% * var(--forward)));
+  }
+}
+
+/* ── Items ──────────────────────────────────────────────── */
+.category {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-4);
+  height: 84px;
+  padding-inline: 14px 30px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-xs);
+  color: var(--ink-900);
+  font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+  font-weight: var(--fw-bold);
+  white-space: nowrap;
+}
+
+.categoryIcon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: var(--teal-100);
+  color: var(--teal-600);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+}
+
+/* Hover: the row pauses (see .marquee:hover) and the pill comes forward */
+.category,
+.search {
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.category:hover {
+  transform: translateY(-4px);
+  box-shadow: inset 0 0 0 1.5px var(--teal-300), var(--shadow-md);
+}
+
+.category:hover .categoryIcon {
+  background: var(--teal-500);
+  color: #fff;
+  transform: rotate(-8deg) scale(1.06);
+}
+
+.search:hover {
+  transform: translateY(-3px);
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--teal-500), var(--shadow-sm);
+}
+
+.search {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  height: 64px;
+  padding-inline: 24px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1.5px var(--teal-200);
+  color: var(--teal-700);
+  font-size: clamp(1.0625rem, 1rem + 0.4vw, 1.25rem);
+  font-weight: var(--fw-semibold);
+  white-space: nowrap;
+}
+
+@media (max-width: 639px) {
+  .category {
+    height: 68px;
+    padding-inline: 10px 22px;
+  }
+
+  .categoryIcon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .search {
+    height: 54px;
+    padding-inline: 18px;
+  }
+}
+
+/* Reduced motion: a calm, wrapped list instead of moving rows */
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .track {
+    width: auto;
+    justify-content: center;
+    animation: none;
+  }
+
+  .group[data-clone] {
+    display: none;
+  }
+
+  .group {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .set:not(:first-child) {
+    display: none;
+  }
+
+  .set {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-inline: var(--gutter);
+  }
+}

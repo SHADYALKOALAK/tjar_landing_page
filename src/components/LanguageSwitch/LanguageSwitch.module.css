@@ -1,0 +1,33 @@
+.switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  height: 44px;
+  padding-inline: 12px;
+  border-radius: 14px;
+  color: var(--ink-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  white-space: nowrap;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.switch:hover {
+  background: var(--teal-50);
+  color: var(--teal-700);
+}
+
+.switch svg {
+  flex: none;
+  color: var(--teal-600);
+}
+
+.label {
+  /* Latin "EN" and Arabic "عربي" share one baseline */
+  padding-top: 1px;
+}

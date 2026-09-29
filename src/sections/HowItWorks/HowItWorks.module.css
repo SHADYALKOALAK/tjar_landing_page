@@ -1,0 +1,250 @@
+.how {
+  background: #fff;
+}
+
+/* ════════════════ Desktop: sticky story ════════════════ */
+.story {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 440px);
+  gap: clamp(32px, 5vw, 96px);
+  margin-top: var(--space-4);
+}
+
+.storySteps {
+  padding-block: 8vh 22vh;
+}
+
+.storyStep {
+  display: flex;
+  align-items: center;
+  min-height: 64vh;
+}
+
+.storyStepInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  max-width: 30rem;
+}
+
+.storyNumber {
+  width: fit-content;
+  color: transparent;
+  font-size: clamp(3.5rem, 2rem + 3vw, 5.5rem);
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  -webkit-text-stroke: 1.5px var(--teal-300);
+  transition: color var(--dur-slow) var(--ease-out);
+}
+
+.storyStep[data-active] .storyNumber {
+  color: var(--teal-500);
+  -webkit-text-stroke-color: var(--teal-500);
+}
+
+.storyTitle {
+  margin-top: var(--space-2);
+  color: var(--ink-400);
+  font-size: clamp(1.75rem, 1.2rem + 1.4vw, 2.5rem);
+  transition:
+    color var(--dur-slow) var(--ease-out),
+    translate var(--dur-slow) var(--ease-out);
+}
+
+.storyText {
+  color: var(--ink-500);
+  font-size: var(--fs-lead);
+  line-height: 1.85;
+  transition: color var(--dur-slow) var(--ease-out);
+}
+
+.storyStep[data-active] .storyTitle {
+  color: var(--ink-900);
+  translate: calc(6px * var(--forward)) 0;
+}
+
+.storyStep[data-active] .storyText {
+  color: var(--color-text-body);
+}
+
+.storyAside {
+  position: relative;
+}
+
+.sticky {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  padding-block: var(--space-4);
+}
+
+.sticky::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 12% 2% 4%;
+  border-radius: var(--radius-3xl);
+  background:
+    radial-gradient(circle at 50% 30%, rgb(0 206 103 / 0.16), transparent 55%),
+    var(--teal-50);
+}
+
+.storyDevice {
+  --phone-w: min(290px, calc((100svh - var(--header-h) - 190px) * 0.47));
+}
+
+.storyStatus {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--ink-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.storyStatusIndex {
+  color: var(--teal-700);
+}
+
+/* ════════════════ Mobile & tablet: stepper ════════════════ */
+.stepper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-8);
+  margin-top: var(--space-8);
+}
+
+.stepperToggle {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.toggle {
+  width: min(100%, 360px);
+}
+
+.stepperBody {
+  display: grid;
+  gap: var(--space-8);
+  width: 100%;
+  justify-items: center;
+}
+
+.stepperVisual {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding-block: var(--space-6);
+}
+
+.stepperVisual::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 14% 0 0;
+  border-radius: var(--radius-3xl);
+  background: var(--teal-50);
+}
+
+.stepperDevice {
+  --phone-w: min(58vw, 236px);
+}
+
+.stepperList {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 34rem;
+}
+
+.stepperItem {
+  border-radius: var(--radius-lg);
+  background: var(--surface-app);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.stepperItem[data-active] {
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--teal-200), var(--shadow-sm);
+}
+
+.stepperHeading {
+  font-size: inherit;
+}
+
+.stepperButton {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  min-height: 60px;
+  padding-inline: var(--space-4);
+  color: var(--ink-900);
+  font-size: 1.0625rem;
+  font-weight: var(--fw-bold);
+  text-align: start;
+  border-radius: var(--radius-lg);
+}
+
+.stepperNumber {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--teal-100);
+  color: var(--teal-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.stepperItem[data-active] .stepperNumber {
+  background: var(--teal-500);
+  color: #fff;
+}
+
+.stepperPanel {
+  overflow: hidden;
+}
+
+.stepperText {
+  padding: 0 var(--space-4) var(--space-4);
+  padding-inline-start: calc(var(--space-4) + 30px + var(--space-3));
+  color: var(--color-text-body);
+  font-size: var(--fs-sm);
+  line-height: 1.85;
+}
+
+@media (min-width: 700px) {
+  .stepperBody {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-10);
+  }
+
+  .stepperVisual {
+    width: auto;
+    padding-inline: var(--space-8);
+  }
+
+  .stepperVisual::before {
+    inset: 10% 0 0;
+  }
+
+  .stepperDevice {
+    --phone-w: 240px;
+  }
+}

@@ -1,0 +1,154 @@
+.download {
+  background: #fff;
+  padding-top: calc(var(--section-pad) + 40px);
+}
+
+.band {
+  position: relative;
+  transform-origin: 50% 100%;
+  isolation: isolate;
+  display: grid;
+  gap: var(--space-10);
+  padding: clamp(2rem, 1rem + 4vw, 4.5rem);
+  border-radius: var(--radius-3xl);
+  background:
+    radial-gradient(70% 80% at 0% 110%, rgb(0 206 103 / 0.26), transparent 60%),
+    radial-gradient(70% 90% at 100% -10%, rgb(0 165 165 / 0.6), transparent 60%),
+    linear-gradient(160deg, var(--teal-800) 0%, var(--teal-900) 100%);
+  color: #fff;
+  box-shadow: 0 40px 90px -50px rgb(0 60 60 / 0.8);
+}
+
+/* Decorative layers are clipped to the band; the phones are allowed to break out. */
+.pattern,
+.glow {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.pattern {
+  inset: 0;
+  border-radius: inherit;
+  background-image: radial-gradient(rgb(255 255 255 / 0.12) 1.1px, transparent 1.6px);
+  background-size: 22px 22px;
+  mask-image: radial-gradient(ellipse 60% 70% at 70% 40%, #000 0%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 70% at 70% 40%, #000 0%, transparent 70%);
+}
+
+.glow {
+  top: 8%;
+  left: 12%;
+  width: 36%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(0 206 103 / 0.35), transparent 65%);
+  filter: blur(20px);
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+  text-align: center;
+}
+
+.logo {
+  width: auto;
+  height: 64px;
+  color: #fff;
+}
+
+.title {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-heading);
+}
+
+.text {
+  max-width: 30rem;
+  color: rgb(255 255 255 / 0.84);
+  font-size: var(--fs-lead);
+  line-height: 1.85;
+}
+
+.stores {
+  width: 100%;
+  margin-top: var(--space-3);
+}
+
+.stores > ul {
+  justify-content: center;
+}
+
+/* ── Phones ─────────────────────────────────────────────── */
+.visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.frontPhone {
+  position: relative;
+  z-index: 2;
+}
+
+.frontDevice {
+  --phone-w: min(58vw, 240px);
+  --phone-shadow: 0 3cqw 6cqw rgb(0 0 0 / 0.25), 0 20cqw 30cqw -10cqw rgb(0 0 0 / 0.6);
+}
+
+.backPhone {
+  display: none;
+}
+
+.backDevice {
+  --phone-w: 230px;
+  --phone-shadow: 0 20cqw 30cqw -10cqw rgb(0 0 0 / 0.5);
+}
+
+/* ── Desktop: copy beside the phones, phones break the band ─ */
+@media (min-width: 1024px) {
+  .band {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: 540px;
+  }
+
+  .copy {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .stores > ul {
+    justify-content: flex-start;
+  }
+
+  .visual {
+    align-self: stretch;
+    margin-block: calc(-1 * clamp(2rem, 1rem + 4vw, 4.5rem));
+  }
+
+  .frontPhone {
+    position: absolute;
+    top: -96px;
+    inset-inline-start: 14%;
+  }
+
+  .frontDevice {
+    --phone-w: clamp(230px, 19vw, 262px);
+  }
+
+  .backPhone {
+    position: absolute;
+    z-index: 1;
+    top: -24px;
+    inset-inline-end: 4%;
+    display: block;
+  }
+
+  .backDevice {
+    --phone-w: clamp(200px, 16.5vw, 230px);
+    transform: rotate(calc(-6deg * var(--forward)));
+  }
+}

@@ -1,0 +1,50 @@
+/* Static, clipped frame: masks and opacity applied here never move. */
+.frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Drifting layers get one extra tile so the loop never shows a gap. */
+.drift-xy {
+  inset: calc(-1 * var(--tile-h)) 0 0 calc(-1 * var(--tile-w));
+  animation: drift-xy 70s linear infinite;
+  will-change: transform;
+}
+
+.drift-x {
+  inset: 0 0 0 calc(-1 * var(--tile-w));
+  animation: drift-x 9s linear infinite;
+  will-change: transform;
+}
+
+@keyframes drift-xy {
+  to {
+    transform: translate3d(var(--tile-w), var(--tile-h), 0);
+  }
+}
+
+@keyframes drift-x {
+  to {
+    transform: translate3d(var(--tile-w), 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drift-xy,
+  .drift-x {
+    animation: none;
+  }
+}

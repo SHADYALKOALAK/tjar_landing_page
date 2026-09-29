@@ -1,0 +1,330 @@
+.header {
+  position: fixed;
+  z-index: var(--z-header);
+  top: 10px;
+  inset-inline: 0;
+  width: min(var(--container), 100% - 2 * var(--gutter));
+  margin-inline: auto;
+  transition: top var(--dur-slow) var(--ease-out);
+}
+
+.bar {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  height: calc(var(--header-h) - 12px);
+  padding-inline: 16px 6px;
+  border-radius: 20px;
+  background: rgb(255 255 255 / 0.62);
+  border: 1px solid rgb(255 255 255 / 0.75);
+  backdrop-filter: blur(18px) saturate(170%);
+  -webkit-backdrop-filter: blur(18px) saturate(170%);
+  transition:
+    height var(--dur-slow) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out),
+    border-color var(--dur-base) var(--ease-out);
+}
+
+/* Scrolled: slightly tighter, solid and lifted — never hidden */
+.scrolled {
+  top: 8px;
+}
+
+.scrolled .bar {
+  height: calc(var(--header-h) - 16px);
+  background: rgb(255 255 255 / 0.92);
+  border-color: rgb(226 233 233 / 0.95);
+  box-shadow: 0 1px 2px rgb(15 27 27 / 0.05), 0 14px 34px -18px rgb(0 60 60 / 0.35);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  flex: none;
+  color: var(--teal-500);
+  border-radius: var(--radius-sm);
+}
+
+.logo {
+  width: auto;
+  height: 34px;
+}
+
+/* ── Desktop navigation ─────────────────────────────────── */
+.nav {
+  display: none;
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-inline: 13px;
+  border-radius: var(--radius-pill);
+  color: var(--ink-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-medium);
+  white-space: nowrap;
+  transition: color var(--dur-base) var(--ease-out);
+}
+
+.navPill {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: inherit;
+  background: var(--teal-100);
+}
+
+.navText {
+  position: relative;
+  z-index: 1;
+}
+
+.navLink:hover {
+  color: var(--teal-700);
+}
+
+.navLink[aria-current] {
+  color: var(--teal-700);
+  font-weight: var(--fw-semibold);
+}
+
+.navLink[aria-current]::after {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  bottom: 3px;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green-500);
+  transform: translateX(-50%);
+}
+
+/* ── Actions: download CTA (desktop) + menu toggle (mobile) ─ */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.actions .cta {
+  --btn-h: 44px;
+  --btn-px: 20px;
+  --btn-fs: 0.9375rem;
+
+  display: none;
+}
+
+.menuToggle {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  color: var(--ink-900);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.menuToggle:hover,
+.open .menuToggle {
+  background: var(--teal-50);
+}
+
+/* Animated burger → close */
+.burger,
+.burger::before,
+.burger::after {
+  display: block;
+  width: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    opacity var(--dur-fast) var(--ease-out);
+}
+
+.burger {
+  position: relative;
+}
+
+.burger::before,
+.burger::after {
+  content: '';
+  position: absolute;
+  left: 0;
+}
+
+.burger::before {
+  transform: translateY(-6px);
+}
+
+.burger::after {
+  transform: translateY(6px);
+}
+
+.open .burger {
+  background: transparent;
+}
+
+.open .burger::before {
+  transform: rotate(45deg);
+}
+
+.open .burger::after {
+  transform: rotate(-45deg);
+}
+
+/* ── Mobile menu (near full screen) ─────────────────────── */
+.backdrop {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background: rgb(4 30 30 / 0.35);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.menu {
+  position: fixed;
+  z-index: 1;
+  top: calc(var(--header-h) + 2px);
+  bottom: 12px;
+  inset-inline: var(--gutter);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-6);
+  padding: var(--space-3) var(--space-3) var(--space-5);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: var(--shadow-lg);
+  transform-origin: top center;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 58px;
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-lg);
+  color: var(--ink-900);
+  font-size: 1.1875rem;
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out);
+}
+
+.menuLink svg {
+  color: var(--ink-400);
+  transition: translate var(--dur-base) var(--ease-out);
+}
+
+.menuLink:hover,
+.menuLink[aria-current] {
+  background: var(--teal-50);
+  color: var(--teal-700);
+}
+
+.menuLink:hover svg {
+  translate: calc(4px * var(--forward)) 0;
+}
+
+.menuFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-4) 0;
+  border-top: 1px solid var(--line);
+}
+
+.menuLabel {
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.menuLegal {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-5);
+}
+
+.menuLegalLink {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--ink-600);
+  font-size: var(--fs-sm);
+  border-radius: 4px;
+}
+
+.menuLegalLink:hover {
+  color: var(--teal-700);
+}
+
+
+@media (min-width: 1024px) {
+  .header {
+    top: 16px;
+  }
+
+  .scrolled {
+    top: 10px;
+  }
+
+  .bar {
+    height: calc(var(--header-h) - 16px);
+    padding-inline: 26px 10px;
+    border-radius: 22px;
+  }
+
+  .scrolled .bar {
+    height: calc(var(--header-h) - 20px);
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .nav {
+    display: block;
+  }
+
+  .actions .cta {
+    display: inline-flex;
+  }
+
+  .menuToggle {
+    display: none;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1180px) {
+  .navLink {
+    padding-inline: 10px;
+  }
+}

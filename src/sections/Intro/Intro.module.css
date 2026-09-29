@@ -1,0 +1,98 @@
+.intro {
+  background: #fff;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+  color: var(--teal-700);
+  font-size: var(--fs-body);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+}
+
+.eyebrowLine {
+  width: 36px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--green-500);
+}
+
+.statement {
+  max-width: 15em;
+  color: var(--ink-900);
+  font-size: clamp(1.75rem, 1rem + 3.4vw, 3.75rem);
+  font-weight: var(--fw-semibold);
+  line-height: 1.5;
+}
+
+.pairs {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: clamp(3rem, 2rem + 5vw, 6rem);
+  padding-top: clamp(2rem, 1rem + 3vw, 3.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.pair {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-3) var(--space-5);
+}
+
+.question {
+  color: var(--ink-900);
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.4;
+}
+
+.answer {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: 0.2em 0.65em 0.3em;
+  border-radius: 18px;
+  font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
+  font-weight: var(--fw-bold);
+  line-height: 1.35;
+}
+
+.answerIcon {
+  flex: none;
+}
+
+/* Owner: brand teal. Large bold text on #00A5A5 meets AA-large. */
+.owner .answer {
+  background: var(--teal-500);
+  color: #fff;
+  box-shadow: 0 16px 30px -16px rgb(0 136 136 / 0.8);
+}
+
+/* Renter: brand green with ink text (8:1). */
+.renter .answer {
+  background: var(--green-500);
+  color: var(--ink-900);
+  box-shadow: 0 16px 30px -16px rgb(0 160 80 / 0.7);
+}
+
+.closing {
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4rem);
+  color: var(--color-text-body);
+  font-size: var(--fs-lead);
+}
+
+@media (min-width: 900px) {
+  .pairs {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-8);
+  }
+
+  .renter {
+    padding-inline-start: var(--space-8);
+    border-inline-start: 1px solid var(--line);
+  }
+}

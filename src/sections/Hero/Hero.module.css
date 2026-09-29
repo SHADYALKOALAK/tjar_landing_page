@@ -1,0 +1,332 @@
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding-top: calc(var(--header-h) + clamp(28px, 5vw, 56px));
+  padding-bottom: clamp(56px, 7vw, 104px);
+  overflow: hidden;
+  overflow: clip;
+}
+
+.inner {
+  display: grid;
+  gap: clamp(48px, 8vw, 72px);
+  align-items: center;
+}
+
+/* ── Copy ───────────────────────────────────────────────── */
+.copy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+  text-align: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 7px 16px;
+  border-radius: var(--radius-pill);
+  background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-xs);
+  color: var(--teal-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+}
+
+.eyebrowDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-500);
+  box-shadow: 0 0 0 4px rgb(0 206 103 / 0.18);
+}
+
+.title {
+  color: var(--ink-900);
+  /* Sized so each headline line fits on one line of its column */
+  font-size: var(--fs-display);
+  font-weight: var(--fw-bold);
+  line-height: var(--lh-display);
+}
+
+/* Masked line reveal; extra padding keeps Arabic marks from being clipped */
+.line {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.16em 0.14em;
+  margin-block: -0.16em -0.14em;
+}
+
+.lineText {
+  display: inline-block;
+}
+
+.accent {
+  position: relative;
+  display: inline-block;
+  color: var(--teal-500);
+}
+
+/* Underlines the end of the line (left in Arabic, right in English) */
+.swoosh {
+  position: absolute;
+  inset-inline-end: 0;
+  bottom: -0.1em;
+  width: 36%;
+  height: 0.3em;
+  overflow: visible;
+  fill: none;
+  stroke: var(--green-500);
+  stroke-width: 5px;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.swoosh path {
+  vector-effect: non-scaling-stroke;
+}
+
+.lead {
+  max-width: 34rem;
+  color: var(--color-text-body);
+  font-size: var(--fs-lead);
+  line-height: 1.85;
+}
+
+/* Official store badges: the hero's download action */
+.stores {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.badges {
+  justify-content: center;
+}
+
+/* ── Visual composition ─────────────────────────────────── */
+.visual {
+  --front-w: min(60vw, 280px);
+  --back-w: calc(var(--front-w) * 0.8);
+
+  position: relative;
+  width: 100%;
+  height: calc(var(--front-w) * 2.08 + 40px);
+}
+
+.stageWrap {
+  position: absolute;
+  inset: 16% 0 0;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: var(--radius-3xl);
+  background: var(--gradient-brand);
+  box-shadow: 0 40px 80px -40px rgb(0 110 110 / 0.55);
+}
+
+.stagePattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgb(255 255 255 / 0.2) 1.1px, transparent 1.6px);
+  background-size: 20px 20px;
+  mask-image: linear-gradient(200deg, #000 0%, transparent 65%);
+  -webkit-mask-image: linear-gradient(200deg, #000 0%, transparent 65%);
+}
+
+.stageGlow {
+  position: absolute;
+  bottom: -30%;
+  left: 50%;
+  width: 90%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgb(0 206 103 / 0.45), transparent 62%);
+  transform: translateX(-50%);
+  filter: blur(10px);
+}
+
+/* Positions are logical so the whole composition mirrors for LTR. */
+.frontPhone {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  inset-inline-end: 54%;
+  translate: calc(50% * var(--forward)) 0;
+}
+
+.frontDevice {
+  --phone-w: var(--front-w);
+  --phone-shadow: 0 3cqw 6cqw rgb(0 40 40 / 0.2), 0 22cqw 30cqw -10cqw rgb(0 30 30 / 0.55);
+}
+
+.backPhone {
+  position: absolute;
+  z-index: 1;
+  top: 13%;
+  /* Keeps the rotated corner inside the viewport on narrow screens */
+  inset-inline-end: 10%;
+  transform: rotate(calc(6deg * var(--forward)));
+  transform-origin: 50% 80%;
+}
+
+.backDevice {
+  --phone-w: var(--back-w);
+}
+
+/* ── Floating chips ─────────────────────────────────────── */
+.chip {
+  position: absolute;
+  z-index: 3;
+}
+
+.chipBody {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px 8px 10px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(15 27 27 / 0.06), 0 18px 36px -14px rgb(0 60 60 / 0.4);
+  white-space: nowrap;
+  transition:
+    box-shadow var(--dur-slow) var(--ease-out),
+    scale var(--dur-slow) var(--ease-out);
+}
+
+/* Lights up while its screen is showing in the phone */
+.chipBody[data-highlighted] {
+  scale: 1.06;
+  box-shadow:
+    0 0 0 2px var(--green-500),
+    0 22px 40px -14px rgb(0 60 60 / 0.5);
+}
+
+.chipBody[data-highlighted] .chipIcon {
+  background: var(--teal-500);
+  color: #fff;
+}
+
+.chipIcon {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--teal-100);
+  color: var(--teal-600);  transition:
+    background-color var(--dur-slow) var(--ease-out),
+    color var(--dur-slow) var(--ease-out);
+}
+
+.chipLabel {
+  color: var(--ink-900);
+  font-size: var(--fs-xs);
+  font-weight: var(--fw-semibold);
+}
+
+.chipDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--red-500);
+  box-shadow: 0 0 0 3px rgb(239 68 68 / 0.18);
+}
+
+.chipOwner {
+  top: 20%;
+  inset-inline-start: 0;
+}
+
+.chipRenter {
+  bottom: 8%;
+  inset-inline-end: 0;
+}
+
+/* ── Tablet ─────────────────────────────────────────────── */
+@media (min-width: 640px) {
+  .chipBody {
+    padding: 10px 18px 10px 12px;
+  }
+
+  .chipLabel {
+    font-size: var(--fs-sm);
+  }
+
+  .chipIcon {
+    width: 38px;
+    height: 38px;
+  }
+
+  .chipOwner {
+    inset-inline-start: 4%;
+  }
+
+  .chipRenter {
+    inset-inline-end: 6%;
+  }
+}
+
+/* ── Desktop: two columns, visual beside the copy ──────── */
+@media (min-width: 1024px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(24px, 4vw, 64px);
+  }
+
+  .copy {
+    align-items: flex-start;
+    text-align: start;
+    gap: var(--space-8);
+  }
+
+  .title {
+    font-size: min(3.8rem, 4.5vw);
+  }
+
+  .stores {
+    justify-content: flex-start;
+  }
+
+  .badges {
+    justify-content: flex-start;
+  }
+
+  .visual {
+    --front-w: clamp(240px, 20.5vw, 300px);
+    --back-w: calc(var(--front-w) * 0.84);
+    height: calc(var(--front-w) * 2.08 + 56px);
+  }
+
+  .stageWrap {
+    inset: 13% 0 0;
+  }
+
+  .frontPhone {
+    inset-inline-end: auto;
+    inset-inline-start: 20%;
+    translate: none;
+  }
+
+  .backPhone {
+    top: 12%;
+    inset-inline-end: 5%;
+    transform: rotate(calc(9deg * var(--forward)));
+  }
+
+  .chipOwner {
+    top: 22%;
+    inset-inline-start: -3%;
+  }
+
+  .chipRenter {
+    bottom: 11%;
+    inset-inline-end: -2%;
+  }
+}

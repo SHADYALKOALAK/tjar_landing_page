@@ -1,0 +1,129 @@
+.root {
+  position: fixed;
+  z-index: var(--z-skip);
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(4 30 30 / 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  max-height: calc(100svh - 24px);
+  padding: 14px var(--space-6) calc(var(--space-8) + env(safe-area-inset-bottom));
+  overflow-y: auto;
+  border-radius: 28px 28px 0 0;
+  background: #fff;
+  box-shadow: 0 -20px 60px -20px rgb(0 40 40 / 0.45);
+  text-align: center;
+  touch-action: none;
+}
+
+.grabber {
+  width: 42px;
+  height: 5px;
+  margin-bottom: var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--line-strong);
+}
+
+.close {
+  position: absolute;
+  top: 14px;
+  inset-inline-end: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surface-app);
+  color: var(--ink-700);
+  transition: background-color var(--dur-base) var(--ease-out);
+}
+
+.close:hover {
+  background: var(--teal-100);
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 20px;
+  background: var(--gradient-brand);
+  box-shadow: 0 14px 28px -14px rgb(0 136 136 / 0.8);
+}
+
+.logo {
+  width: 46px;
+  height: auto;
+  color: #fff;
+}
+
+.title {
+  margin-top: var(--space-2);
+  color: var(--ink-900);
+  font-size: 1.5rem;
+}
+
+.text {
+  max-width: 22rem;
+  color: var(--color-text-body);
+  font-size: var(--fs-sm);
+  line-height: 1.8;
+}
+
+.badges {
+  align-items: center;
+  margin-top: var(--space-3);
+}
+
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  margin-top: var(--space-2);
+  color: var(--teal-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-semibold);
+  border-radius: var(--radius-sm);
+}
+
+@media (min-width: 640px) {
+  .root {
+    align-items: center;
+    padding: var(--space-6);
+  }
+
+  .panel {
+    width: min(440px, 100%);
+    padding: var(--space-10) var(--space-8) var(--space-8);
+    border-radius: 28px;
+    box-shadow: var(--shadow-lg);
+    touch-action: auto;
+  }
+
+  .grabber {
+    display: none;
+  }
+
+  .badges {
+    flex-direction: row;
+    justify-content: center;
+  }
+}

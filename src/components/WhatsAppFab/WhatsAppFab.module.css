@@ -1,0 +1,147 @@
+/*
+ * Anchored to the bottom corner at the reading end (left in Arabic, right in
+ * English), away from the start of every line. The label grows toward the
+ * page centre.
+ */
+.fab {
+  --fab-size: 58px;
+  --wa-green: #25d366;
+
+  position: fixed;
+  z-index: 90;
+  inset-inline-end: 16px;
+  bottom: max(16px, calc(12px + env(safe-area-inset-bottom)));
+  /* Label first, button last: the button always sits on the anchored edge */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: var(--radius-pill);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.button {
+  position: relative;
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: var(--fab-size);
+  height: var(--fab-size);
+  border-radius: 50%;
+  background: var(--wa-green);
+  color: #fff;
+  box-shadow:
+    0 10px 24px -8px rgb(18 140 80 / 0.6),
+    0 2px 6px rgb(0 0 0 / 0.12);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* Soft attention ring, every few seconds */
+.pulse {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 2px solid var(--wa-green);
+  animation: pulse 3.2s var(--ease-out) infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+
+  60%,
+  100% {
+    opacity: 0;
+    transform: scale(1.55);
+  }
+}
+
+/* White label that slides out beside the button */
+.label {
+  display: flex;
+  flex-direction: column;
+  padding: 9px 16px;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow:
+    0 12px 28px -12px rgb(0 40 40 / 0.35),
+    0 0 0 1px rgb(15 27 27 / 0.06);
+  white-space: nowrap;
+  opacity: 0;
+  translate: calc(10px * var(--forward)) 0;
+  scale: 0.96;
+  visibility: hidden;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    translate var(--dur-base) var(--ease-out),
+    scale var(--dur-base) var(--ease-out),
+    visibility 0s linear var(--dur-base);
+}
+
+.labelTitle {
+  color: var(--ink-900);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  line-height: 1.5;
+}
+
+.labelHint {
+  color: var(--ink-500);
+  font-size: var(--fs-xs);
+  text-align: start;
+}
+
+.fab[data-expanded] .label,
+.fab:hover .label,
+.fab:focus-visible .label {
+  opacity: 1;
+  translate: none;
+  scale: none;
+  visibility: visible;
+  transition:
+    opacity var(--dur-base) var(--ease-out),
+    translate var(--dur-base) var(--ease-out),
+    scale var(--dur-base) var(--ease-out),
+    visibility 0s;
+}
+
+.fab:hover .button,
+.fab:focus-visible .button {
+  transform: scale(1.06);
+  box-shadow:
+    0 14px 30px -8px rgb(18 140 80 / 0.7),
+    0 2px 6px rgb(0 0 0 / 0.14);
+}
+
+.fab:active .button {
+  transform: scale(0.96);
+}
+
+.fab:focus-visible {
+  outline: none;
+}
+
+.fab:focus-visible .button {
+  outline: 3px solid var(--teal-500);
+  outline-offset: 3px;
+}
+
+@media (min-width: 1024px) {
+  .fab {
+    --fab-size: 62px;
+
+    inset-inline-end: 28px;
+    bottom: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse {
+    animation: none;
+    opacity: 0;
+  }
+}

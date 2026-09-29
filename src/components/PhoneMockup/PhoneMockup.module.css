@@ -1,0 +1,194 @@
+/*
+ * iPhone (6.7") frame. Every measurement is in `cqw` of the phone's own width,
+ * so the device keeps correct proportions at any size.
+ * Screen ratio is locked to the real screenshots (430 × 932).
+ */
+.phone {
+  --phone-w: 300px;
+  --phone-shadow: 0 2.5cqw 5cqw rgb(0 40 40 / 0.14), 0 16cqw 26cqw -8cqw rgb(0 50 50 / 0.42);
+
+  position: relative;
+  flex: none;
+  width: var(--phone-w);
+  max-width: 100%;
+  container-type: inline-size;
+  user-select: none;
+}
+
+.frame {
+  position: relative;
+  padding: 1.2cqw;
+  border-radius: 16cqw;
+  background:
+    linear-gradient(
+      140deg,
+      #4a4e54 0%,
+      #1d1f22 16%,
+      #0c0d0f 46%,
+      #1d1f22 80%,
+      #50545a 100%
+    );
+  box-shadow:
+    inset 0 0 0 0.3cqw rgb(255 255 255 / 0.16),
+    inset 0 0 0 0.75cqw rgb(0 0 0 / 0.5),
+    var(--phone-shadow);
+}
+
+.bezel {
+  position: relative;
+  padding: 2.55cqw;
+  border-radius: 14.8cqw;
+  background: #030404;
+}
+
+.screen {
+  position: relative;
+  aspect-ratio: 430 / 932;
+  overflow: hidden;
+  border-radius: 12.2cqw;
+  background: #eef2f3;
+  isolation: isolate;
+  /* Forces Safari to clip transformed children to the rounded corners */
+  transform: translateZ(0);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  box-shadow: 1.5cqw 0 5cqw rgb(0 0 0 / 0.14);
+}
+
+/* Dynamic Island: 126 × 37pt on a 430pt screen */
+.island {
+  position: absolute;
+  z-index: 4;
+  top: 2.3cqw;
+  left: 50%;
+  width: 26.8cqw;
+  height: 7.9cqw;
+  border-radius: var(--radius-pill);
+  background: #000;
+  transform: translateX(-50%);
+}
+
+.glare {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  background: linear-gradient(
+    118deg,
+    rgb(255 255 255 / 0.1) 0%,
+    rgb(255 255 255 / 0.03) 30%,
+    rgb(255 255 255 / 0) 42%
+  );
+  pointer-events: none;
+}
+
+/* Hardware buttons (physical sides, not mirrored in RTL) */
+.hw {
+  position: absolute;
+  z-index: -1;
+  width: 1.1cqw;
+  border-radius: 0.6cqw;
+  background: linear-gradient(90deg, #2a2d31, #55595f 60%, #2a2d31);
+}
+
+.action {
+  top: 17%;
+  left: -0.7cqw;
+  height: 3.2%;
+}
+
+.volUp {
+  top: 24%;
+  left: -0.7cqw;
+  height: 6.2%;
+}
+
+.volDown {
+  top: 32%;
+  left: -0.7cqw;
+  height: 6.2%;
+}
+
+.power {
+  top: 27%;
+  right: -0.7cqw;
+  height: 9.6%;
+}
+
+/* ── Spotlight (coach-mark) over a real UI region ─────────── */
+.spotlight {
+  position: absolute;
+  z-index: 2;
+  box-shadow:
+    0 0 0 0.75cqw var(--green-500),
+    0 0 0 220cqw rgb(4 30 30 / 0.34);
+  pointer-events: none;
+}
+
+.spotlight::after {
+  content: '';
+  position: absolute;
+  inset: -0.75cqw;
+  border-radius: inherit;
+  border: 0.75cqw solid var(--green-500);
+  animation: pulse 2.2s var(--ease-out) infinite;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.08, 1.35);
+  }
+}
+
+/* ── Numbered markers (pinned to the screen's right edge) ─── */
+.markers {
+  position: absolute;
+  z-index: 6;
+  inset: 2.55cqw;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 7.4cqw;
+  height: 7.4cqw;
+  border-radius: 50%;
+  background: var(--teal-500);
+  color: #fff;
+  font-size: 4cqw;
+  font-weight: var(--fw-bold);
+  line-height: 1;
+  box-shadow: 0 0 0 0.8cqw #fff, 0 1.5cqw 3cqw rgb(0 60 60 / 0.35);
+  transform: translate(50%, -50%) scale(0.86);
+  transition:
+    transform var(--dur-base) var(--ease-out),
+    background-color var(--dur-base) var(--ease-out);
+}
+
+.marker[data-active] {
+  background: var(--green-500);
+  color: var(--ink-900);
+  transform: translate(50%, -50%) scale(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spotlight::after {
+    animation: none;
+    opacity: 0;
+  }
+}

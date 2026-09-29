@@ -1,0 +1,13 @@
+/* Each word slides up from its own mask. The extra block padding keeps Arabic
+   dots and diacritics from being clipped; the negative margin cancels it out. */
+.mask {
+  display: inline-block;
+  overflow: hidden;
+  padding-block: 0.18em 0.14em;
+  margin-block: -0.18em -0.14em;
+  vertical-align: top;
+}
+
+.word {
+  display: inline-block;
+}

@@ -1,0 +1,130 @@
+.showcase {
+  background:
+    radial-gradient(50% 40% at 50% 55%, rgb(0 165 165 / 0.09), transparent 70%),
+    #fff;
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-8);
+  justify-items: center;
+  margin-top: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+}
+
+.device {
+  order: -1;
+}
+
+.phone {
+  --phone-w: min(68vw, 300px);
+}
+
+/* ── Callouts ───────────────────────────────────────────── */
+.callouts {
+  display: grid;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 34rem;
+}
+
+.calloutButton {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  text-align: start;
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.callout[data-active] .calloutButton {
+  background: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--teal-200), var(--shadow-md);
+}
+
+.calloutNumber {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--teal-100);
+  color: var(--teal-700);
+  font-size: var(--fs-sm);
+  font-weight: var(--fw-bold);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    color var(--dur-base) var(--ease-out),
+    transform var(--dur-base) var(--ease-out);
+}
+
+.callout[data-active] .calloutNumber {
+  background: var(--green-500);
+  color: var(--ink-900);
+  transform: scale(1.08);
+}
+
+.calloutBody {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.calloutTitle {
+  color: var(--ink-900);
+  font-size: 1.0625rem;
+  font-weight: var(--fw-bold);
+  line-height: 1.6;
+}
+
+.calloutText {
+  color: var(--color-text-body);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+}
+
+/* Tablet: callouts in two columns under the phone */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .layout {
+    grid-template-columns: 1fr 1fr;
+    align-items: start;
+  }
+
+  .device {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Desktop: callouts flank the phone */
+@media (min-width: 1024px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(24px, 4vw, 64px);
+  }
+
+  .device {
+    order: 0;
+  }
+
+  .phone {
+    --phone-w: clamp(270px, 23vw, 320px);
+  }
+
+  .callouts {
+    gap: var(--space-4);
+    max-width: 22rem;
+  }
+
+  .calloutsStart {
+    justify-self: end;
+  }
+
+  .calloutsEnd {
+    justify-self: start;
+  }
+}
