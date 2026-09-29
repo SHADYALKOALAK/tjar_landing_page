@@ -1,4 +1,5 @@
-import { SITE_URL, contact } from '../config/site.js';
+import { contact } from '../config/site.js';
+import { SITE_URL } from '../config/siteUrl.js';
 import { LOCALE_CODES, LOCALES, DEFAULT_LOCALE } from '../i18n/locales.js';
 import { pagePath } from '../i18n/routes.js';
 import ar from '../content/ar/index.js';
@@ -50,6 +51,7 @@ export function buildMetadata(pageId, locale) {
   const ogImage = publicUrl(t.meta.ogImage);
 
   return {
+    metadataBase: new URL(SITE_URL),
     title: { absolute: meta.title },
     description: meta.description,
     // Official TJAR logo on the brand gradient (generated into public/).

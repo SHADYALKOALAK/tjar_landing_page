@@ -1,19 +1,12 @@
 /**
  * Site-wide, language-independent configuration: the single place for real
- * links, numbers and the production URL. All visible text lives in
- * src/content/<locale>/.
+ * links and numbers. All visible text lives in src/content/<locale>/.
+ * The site's public origin is resolved separately, in ./siteUrl.js.
  *
  * Nothing here is invented: values that were not supplied are left empty and
  * render as clearly-marked placeholders (or not at all) until filled in.
  * Pure data: also imported by the build-time SEO generator (Node).
  */
-
-/**
- * Production origin, used for canonical URLs, hreflang, Open Graph and the
- * sitemap. Assumed from the official email domain (info@tjar.com) —
- * change it here if the site is hosted elsewhere.
- */
-export const SITE_URL = 'https://tjar.com';
 
 /** Header / menu navigation: section links on the home page, then pages. */
 export const NAV = [
