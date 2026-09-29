@@ -5,7 +5,7 @@
 export default {
   meta: {
     siteName: 'TJAR',
-    ogImage: '/og-image.jpg',
+    ogImage: '/og-image-en.jpg',
     ogImageAlt: 'The TJAR logo with real screens from the TJAR app',
     pages: {
       home: {
