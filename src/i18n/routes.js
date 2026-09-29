@@ -4,7 +4,8 @@ import { DEFAULT_LOCALE, LOCALE_CODES } from './locales.js';
  * Page registry: id → path segment. Every page exists in every locale:
  *   ar: /, /contact, /privacy-policy, /terms
  *   en: /en, /en/contact, /en/privacy-policy, /en/terms
- * Pure data: also imported by vite.config.js and the SEO generator.
+ * Pure data, shared by the locale context, the navigation links and the
+ * sitemap/metadata helpers.
  */
 export const PAGES = {
   home: '',

@@ -52,6 +52,13 @@
   transform: translateZ(0);
 }
 
+/* Motion wrapper around the optimised <Image>: carries the screen-swap
+   transition, and keeps the image pinned to the screen like the old <m.img>. */
+.swap {
+  position: absolute;
+  inset: 0;
+}
+
 .image {
   position: absolute;
   inset: 0;

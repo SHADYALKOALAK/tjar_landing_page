@@ -6,6 +6,35 @@
   width: min(var(--container), 100% - 2 * var(--gutter));
   margin-inline: auto;
   transition: top var(--dur-slow) var(--ease-out);
+  /* Runs at first paint; --enter-y and --enter-delay come from Header.jsx.
+     The keyframes are declared below in this same file: CSS Modules only
+     rewrites an animation-name to match a @keyframes rule in the same file,
+     so a global name would be left dangling and the bar would never move.
+
+     `backwards`, not `both`: the mobile drawer and its backdrop are
+     position: fixed children of this header, and any transform on an ancestor
+     makes that ancestor the containing block for fixed descendants. Retaining
+     the `to` frame's transform after the animation would pin the drawer to
+     the height of the header bar and collapse it. `backwards` applies the
+     `from` state during the delay only, so the bar starts hidden and ends on
+     its natural styles with no transform at all. */
+  animation-name: enterFadeUp;
+  animation-duration: 0.8s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+@keyframes enterFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--enter-y, -28px), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .bar {

@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import DeviceReveal from '../../components/DeviceReveal/DeviceReveal';
 import Icon from '../../components/Icon/Icon';

@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import { useId, useRef } from 'react';
 import { useLocale } from '../../i18n/LocaleContext';

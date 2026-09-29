@@ -1,3 +1,5 @@
+'use client';
+
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
 
 /** Which side of the marketplace the visitor is exploring: 'owner' | 'renter'. */

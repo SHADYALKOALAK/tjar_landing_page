@@ -1,3 +1,5 @@
+'use client';
+
 import { LazyMotion, MotionConfig, domMax } from 'framer-motion';
 import WhatsAppFab from '../components/WhatsAppFab/WhatsAppFab';
 import { AudienceProvider } from '../context/AudienceContext';

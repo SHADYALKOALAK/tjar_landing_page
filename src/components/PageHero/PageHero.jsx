@@ -1,3 +1,5 @@
+'use client';
+
 import { useLocale } from '../../i18n/LocaleContext';
 import BrandPattern from '../BrandPattern/BrandPattern';
 import Reveal from '../Reveal/Reveal';

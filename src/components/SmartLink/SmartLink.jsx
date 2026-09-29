@@ -1,3 +1,5 @@
+'use client';
+
 import { useLocale } from '../../i18n/LocaleContext';
 
 /**

@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, m } from 'framer-motion';
 import DeviceReveal from '../../components/DeviceReveal/DeviceReveal';
 import PhoneMockup from '../../components/PhoneMockup/PhoneMockup';

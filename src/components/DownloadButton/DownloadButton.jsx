@@ -1,3 +1,5 @@
+'use client';
+
 import { useDownload } from '../../context/DownloadContext';
 import { useLocale } from '../../i18n/LocaleContext';
 import { useDownloadHref } from '../../i18n/useLinks';

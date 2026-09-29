@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import Icon from '../../components/Icon/Icon';
 import Reveal from '../../components/Reveal/Reveal';

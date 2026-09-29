@@ -1,3 +1,5 @@
+'use client';
+
 import BrandPattern from '../../components/BrandPattern/BrandPattern';
 import Logo from '../../components/Logo/Logo';
 import Reveal from '../../components/Reveal/Reveal';
@@ -94,7 +96,10 @@ export default function Footer() {
           </div>
         </div>
 
-        <p className={styles.copyright}>{t.footer.copyright(year)}</p>
+        {/* The page is prerendered at build time; after New Year the browser's year can differ from the HTML. */}
+        <p className={styles.copyright} suppressHydrationWarning>
+          {t.footer.copyright.replace('{year}', year)}
+        </p>
       </div>
 
       <BrandPattern variant="band" className={styles.band} />

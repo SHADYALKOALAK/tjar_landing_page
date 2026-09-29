@@ -91,7 +91,7 @@ export default {
     whatsapp: 'واتساب:',
     email: 'البريد:',
     vat: 'الرقم الضريبي:',
-    copyright: (year) => `جميع الحقوق محفوظة تي جار © ${year}`,
+    copyright: 'جميع الحقوق محفوظة تي جار © {year}',
   },
 
   legalPage: {

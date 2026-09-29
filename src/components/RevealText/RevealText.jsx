@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import { Fragment } from 'react';
 import { EASE_OUT } from '../../lib/motion';

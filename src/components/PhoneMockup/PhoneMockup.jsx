@@ -1,3 +1,6 @@
+'use client';
+
+import Image from 'next/image';
 import { AnimatePresence, m } from 'framer-motion';
 import { SCREEN_SIZE, screens } from '../../content/screens';
 import { useLocale } from '../../i18n/LocaleContext';
@@ -37,6 +40,10 @@ const toPercent = ({ x, y, w, h }) => ({
  * The frame scales from a single width (`--phone-w`) through container
  * query units, so bezel, radius and Dynamic Island stay proportional.
  *
+ * The screenshot is rendered with next/image; the swap animation lives on a
+ * motion wrapper around it, because next/image renders a plain <img> and
+ * cannot take motion props.
+ *
  * @param screen     key of `screens` (e.g. 'home')
  * @param priority   load eagerly with high fetch priority (above the fold)
  * @param highlight  hotspot to spotlight on the screen (see `hotspots`)
@@ -70,19 +77,20 @@ export default function PhoneMockup({
         <div className={styles.bezel}>
           <div className={styles.screen}>
             <AnimatePresence initial={false}>
-              <m.img
-                key={src}
-                src={src}
-                alt={decorative ? '' : alt}
-                width={SCREEN_SIZE.width}
-                height={SCREEN_SIZE.height}
-                loading={priority ? 'eager' : 'lazy'}
-                fetchPriority={priority ? 'high' : undefined}
-                decoding="async"
-                draggable="false"
-                className={styles.image}
-                {...SWAPS[swap]}
-              />
+              <m.div key={screen} className={styles.swap} {...SWAPS[swap]}>
+                <Image
+                  src={src}
+                  alt={decorative ? '' : alt}
+                  width={SCREEN_SIZE.width}
+                  height={SCREEN_SIZE.height}
+                  sizes="(max-width: 1023px) 240px, 300px"
+                  priority={priority}
+                  loading={priority ? 'eager' : 'lazy'}
+                  decoding="async"
+                  draggable={false}
+                  className={styles.image}
+                />
+              </m.div>
             </AnimatePresence>
 
             {highlight && (

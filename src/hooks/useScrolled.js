@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useState } from 'react';
 
 /** True once the page has scrolled past `threshold` pixels. */

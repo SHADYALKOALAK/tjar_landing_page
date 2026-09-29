@@ -13,7 +13,6 @@
   align-items: center;
 }
 
-/* ── Copy ───────────────────────────────────────────────── */
 .copy {
   display: flex;
   flex-direction: column;
@@ -29,10 +28,10 @@
   padding: 7px 16px;
   border-radius: var(--radius-pill);
   background: #fff;
-  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-xs);
   color: var(--teal-700);
   font-size: var(--fs-sm);
   font-weight: var(--fw-semibold);
+  box-shadow: inset 0 0 0 1px var(--line), var(--shadow-xs);
 }
 
 .eyebrowDot {
@@ -40,27 +39,155 @@
   height: 8px;
   border-radius: 50%;
   background: var(--green-500);
-  box-shadow: 0 0 0 4px rgb(0 206 103 / 0.18);
+  box-shadow: 0 0 0 4px #00ce672e;
 }
 
 .title {
   color: var(--ink-900);
-  /* Sized so each headline line fits on one line of its column */
   font-size: var(--fs-display);
   font-weight: var(--fw-bold);
   line-height: var(--lh-display);
 }
 
-/* Masked line reveal; extra padding keeps Arabic marks from being clipped */
+/*
+ * Each headline line is its own mask: the inner span slides up from below and
+ * the line box clips it, so the type appears to be pulled into place. The
+ * negative margins pull neighbouring lines back together afterwards, because
+ * the clip needs a little room to travel.
+ */
 .line {
   display: block;
   overflow: hidden;
-  padding-block: 0.16em 0.14em;
   margin-block: -0.16em -0.14em;
+  padding-block: 0.16em 0.14em;
 }
 
 .lineText {
   display: inline-block;
+}
+
+.enterUp {
+  animation-name: enterFadeUp;
+  animation-duration: 0.8s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+/*
+ * Headline line: the mask hides it until it slides up. The opacity track is
+ * separate and starts 0.05s later, so Arabic diacritics never peek above the
+ * mask before the line itself has moved.
+ */
+.enterLine {
+  animation-name: enterLineUp, enterFadeIn;
+  animation-duration: 1s, 0.5s;
+  animation-timing-function: var(--ease-out), linear;
+  animation-fill-mode: backwards, backwards;
+  animation-delay: var(--enter-delay, 0s), calc(var(--enter-delay, 0s) + 0.05s);
+}
+
+.enterUnveil {
+  animation-name: enterUnveil;
+  animation-duration: 1.1s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+.enterBack {
+  animation-name: enterBack;
+  animation-duration: 1.1s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+.enterFront {
+  animation-name: enterFront;
+  animation-duration: 1.2s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: backwards;
+  animation-delay: var(--enter-delay, 0s);
+}
+
+@keyframes enterFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--enter-y, 18px), 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes enterFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Headline line sliding up from behind its mask. */
+@keyframes enterLineUp {
+  from {
+    transform: translate3d(0, 120%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes enterUnveil {
+  from {
+    opacity: 0;
+    clip-path: inset(100% 0% 0% 0%);
+  }
+
+  to {
+    opacity: 1;
+    clip-path: inset(0% 0% 0% 0%);
+  }
+}
+
+@keyframes enterBack {
+  from {
+    opacity: 0;
+    transform: translate3d(var(--enter-x, 0), 0, 0) rotate(var(--enter-rot, 0deg));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes drawSwoosh {
+  from {
+    stroke-dashoffset: 1;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes enterFront {
+  from {
+    opacity: 0;
+    transform: translate3d(0, var(--enter-y, 140px), 0) rotate(var(--enter-rot, 0deg));
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
 }
 
 .accent {
@@ -84,8 +211,16 @@
   pointer-events: none;
 }
 
+/* pathLength="1" on the element lets a dash of 1 cover the whole curve. */
 .swoosh path {
   vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation-name: drawSwoosh;
+  animation-duration: 0.9s;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both; /* `both`, unlike the entrances above: the drawn stroke is this element's resting state, so the dash offset must stick at 0 once the swoosh has been drawn. */
+  animation-delay: var(--enter-delay, 0s);
 }
 
 .lead {

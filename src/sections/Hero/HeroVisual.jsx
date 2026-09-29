@@ -1,8 +1,9 @@
+'use client';
+
 import { m, useInView, useReducedMotion, useTransform } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import PhoneMockup from '../../components/PhoneMockup/PhoneMockup';
 import { useLocale } from '../../i18n/LocaleContext';
-import { EASE_OUT } from '../../lib/motion';
 import FloatingChip from './FloatingChip';
 import { HERO_SCREEN_CYCLE, HERO_SCREEN_INTERVAL_MS, HERO_TIMELINE as T } from './timeline';
 import styles from './Hero.module.css';
@@ -57,32 +58,29 @@ export default function HeroVisual({ progress, parallax }) {
   return (
     <div ref={ref} className={styles.visual}>
       <m.div className={styles.stageWrap} style={withParallax({ scale: stageScale })}>
-        <m.div
-          className={styles.stage}
-          initial={{ clipPath: 'inset(100% 0% 0% 0%)', opacity: 0 }}
-          animate={{ clipPath: 'inset(0% 0% 0% 0%)', opacity: 1 }}
-          transition={{ duration: 1.1, ease: EASE_OUT, delay: T.stage }}
+        <div
+          className={`${styles.stage} ${styles.enterUnveil}`}
+          style={{ '--enter-delay': `${T.stage}s` }}
         >
           <span className={styles.stagePattern} aria-hidden="true" />
           <span className={styles.stageGlow} aria-hidden="true" />
-        </m.div>
+        </div>
       </m.div>
 
       <m.div className={styles.backPhone} style={withParallax({ y: backY, rotate: backRotate })}>
-        <m.div
-          initial={{ opacity: 0, x: 70 * forward, rotate: -8 * forward }}
-          animate={{ opacity: 1, x: 0, rotate: 0 }}
-          transition={{ duration: 1.1, ease: EASE_OUT, delay: T.backPhone }}
+        <div
+          className={styles.enterBack}
+          /* Mirrored in LTR so the entrance flips with the composition. */
+          style={{ '--enter-delay': `${T.backPhone}s`, '--enter-x': `${70 * forward}px`, '--enter-rot': `${-8 * forward}deg` }}
         >
           <PhoneMockup screen="product" className={styles.backDevice} priority />
-        </m.div>
+        </div>
       </m.div>
 
       <m.div className={styles.frontPhone} style={withParallax({ y: frontY, rotate: frontRotate })}>
-        <m.div
-          initial={{ opacity: 0, y: 140, rotate: -4 * forward }}
-          animate={{ opacity: 1, y: 0, rotate: 0 }}
-          transition={{ duration: 1.2, ease: EASE_OUT, delay: T.frontPhone }}
+        <div
+          className={styles.enterFront}
+          style={{ '--enter-delay': `${T.frontPhone}s`, '--enter-y': '140px', '--enter-rot': `${-4 * forward}deg` }}
         >
           <m.div {...IDLE_FLOAT}>
             <PhoneMockup
@@ -92,7 +90,7 @@ export default function HeroVisual({ progress, parallax }) {
               priority
             />
           </m.div>
-        </m.div>
+        </div>
       </m.div>
 
       <FloatingChip

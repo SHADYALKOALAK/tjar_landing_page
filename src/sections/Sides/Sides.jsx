@@ -1,3 +1,5 @@
+'use client';
+
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useLocale } from '../../i18n/LocaleContext';
 import SidePanel from './SidePanel';

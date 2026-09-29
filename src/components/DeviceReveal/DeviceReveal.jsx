@@ -1,3 +1,5 @@
+'use client';
+
 import { m, useReducedMotion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 import useMediaQuery, { DESKTOP_QUERY } from '../../hooks/useMediaQuery';

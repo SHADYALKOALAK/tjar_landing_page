@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import { EASE_OUT } from '../../lib/motion';
 import styles from './Showcase.module.css';

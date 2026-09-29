@@ -1,3 +1,5 @@
+'use client';
+
 import Icon from '../../components/Icon/Icon';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import { useLocale } from '../../i18n/LocaleContext';

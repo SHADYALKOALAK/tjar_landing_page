@@ -1,3 +1,5 @@
+'use client';
+
 import { useInView, useReducedMotion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import DeviceReveal from '../../components/DeviceReveal/DeviceReveal';

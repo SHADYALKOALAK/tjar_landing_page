@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, m } from 'framer-motion';
 import { useRef } from 'react';
 import { useLocale } from '../../i18n/LocaleContext';

@@ -54,7 +54,12 @@
   --gradient-brand: linear-gradient(170deg, #00a3a3 0%, #009696 45%, #008888 100%);
 
   /* ── Typography ────────────────────────────────────────── */
-  --font-sans: 'IBM Plex Sans Arabic', system-ui, -apple-system, 'Segoe UI', Tahoma, sans-serif;
+  /* The IBM Plex Sans Arabic families are injected by next/font/local as CSS
+     variables on <html> (see src/lib/fonts.js). One variable per weight and
+     unicode subset, so the browser still picks the right file per character. */
+  --font-sans: var(--font-plex-ar-400), var(--font-plex-ar-600), var(--font-plex-latin-400),
+    var(--font-plex-latin-600), var(--font-plex-latin-ext), var(--font-plex-cyrillic-ext), system-ui,
+    -apple-system, 'Segoe UI', Tahoma, sans-serif;
 
   --fs-display: clamp(1.9rem, 8.6vw, 4rem);
   --fs-h2: clamp(1.875rem, 1.25rem + 2.5vw, 3.25rem);

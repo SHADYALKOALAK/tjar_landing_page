@@ -1,3 +1,5 @@
+'use client';
+
 import { m } from 'framer-motion';
 import { DURATION, EASE_OUT } from '../../lib/motion';
 

@@ -34,8 +34,9 @@
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  background: var(--btn-primary-bg);
-  box-shadow: 0 8px 18px -8px rgb(0 136 136 / 0.7);
+  /* Darker brand teal: white 16px labels need 4.5:1 (#00A5A5 only gives 3:1). */
+  background: var(--teal-700);
+  box-shadow: 0 8px 18px -8px rgb(0 115 115 / 0.7);
 }
 
 .label {

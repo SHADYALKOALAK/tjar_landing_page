@@ -4,14 +4,14 @@
     {
       "name": "tjar-dev",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--", "--port", "5173", "--strictPort"],
-      "port": 5173
+      "runtimeArgs": ["run", "dev", "--", "--port", "3000"],
+      "port": 3000
     },
     {
-      "name": "tjar-preview",
+      "name": "tjar-start",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "preview", "--", "--port", "4173", "--strictPort"],
-      "port": 4173
+      "runtimeArgs": ["run", "start", "--", "--port", "3000"],
+      "port": 3000
     }
   ]
 }

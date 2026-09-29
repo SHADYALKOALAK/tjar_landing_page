@@ -1,3 +1,5 @@
+'use client';
+
 import { AnimatePresence, m } from 'framer-motion';
 import Icon from '../../components/Icon/Icon';
 import { EASE_OUT } from '../../lib/motion';

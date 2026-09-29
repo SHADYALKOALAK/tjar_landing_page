@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 import SectionHeading from '../../components/SectionHeading/SectionHeading';
 import SegmentedControl from '../../components/SegmentedControl/SegmentedControl';

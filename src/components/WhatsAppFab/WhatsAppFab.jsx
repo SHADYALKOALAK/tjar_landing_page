@@ -1,3 +1,5 @@
+'use client';
+
 import { m, useReducedMotion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { contact } from '../../config/site';
@@ -37,13 +39,13 @@ export default function WhatsAppFab() {
       rel="noopener noreferrer"
       className={styles.fab}
       data-expanded={intro || undefined}
-      aria-label={t.whatsappFab.label}
+      aria-label={`${t.whatsappFab.label} ${contact.whatsappDisplay}`}
       initial={{ opacity: 0, scale: 0.5, y: 24 }}
       animate={{ opacity: 1, scale: 1, y: 0 }}
       transition={{ ...SPRING_SOFT, delay: ENTRANCE_DELAY }}
     >
       <span className={styles.label} aria-hidden="true">
-        <span className={styles.labelTitle}>{t.whatsappFab.label}</span>
+        <span className={styles.labelTitle}>{t.whatsappFab.label}</span>{' '}
         <span className={`${styles.labelHint} latin`}>{contact.whatsappDisplay}</span>
       </span>
       <span className={styles.button} aria-hidden="true">

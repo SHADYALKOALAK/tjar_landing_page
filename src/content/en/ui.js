@@ -5,7 +5,7 @@
 export default {
   meta: {
     siteName: 'TJAR',
-    ogImage: '/og-image-en.jpg',
+    ogImage: '/og-image.jpg',
     ogImageAlt: 'The TJAR logo with real screens from the TJAR app',
     pages: {
       home: {
@@ -91,7 +91,7 @@ export default {
     whatsapp: 'WhatsApp:',
     email: 'Email:',
     vat: 'VAT number:',
-    copyright: (year) => `© ${year} TJAR. All rights reserved.`,
+    copyright: '© {year} TJAR. All rights reserved.',
   },
 
   legalPage: {

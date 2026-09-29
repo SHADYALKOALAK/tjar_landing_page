@@ -1,3 +1,5 @@
+'use client';
+
 import { useMemo } from 'react';
 import { DOWNLOAD_TARGET, NAV } from '../config/site';
 import { useLocale } from './LocaleContext';

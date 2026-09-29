@@ -1,3 +1,6 @@
+'use client';
+
+import { usePathname } from 'next/navigation';
 import { AnimatePresence, m } from 'framer-motion';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import DownloadButton from '../../components/DownloadButton/DownloadButton';
@@ -20,15 +23,16 @@ const SECTION_IDS = NAV.map((item) => item.id);
 const trimSlash = (path) => path.replace(/\/+$/, '') || '/';
 
 /** aria-current value: 'location' for the section in view, 'page' for the current page. */
-function currentState(item, activeSection) {
+function currentState(item, activeSection, pathname) {
   if (activeSection === item.id) return 'location';
   const isPageLink = !item.href.includes('#');
-  if (isPageLink && trimSlash(item.href) === trimSlash(window.location.pathname)) return 'page';
+  if (isPageLink && trimSlash(item.href) === trimSlash(pathname)) return 'page';
   return undefined;
 }
 
 export default function Header() {
   const { t, href, forward } = useLocale();
+  const pathname = usePathname();
   const navItems = useNavItems();
   const legalLinks = useLegalLinks();
   const scrolled = useScrolled(12);
@@ -58,12 +62,12 @@ export default function Header() {
     .join(' ');
 
   return (
-    <m.header
+    <header
       ref={headerRef}
       className={headerClass}
-      initial={{ y: -28, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.8, ease: EASE_OUT, delay: 0.05 }}
+      /* CSS entrance, see globals.css: the bar used to be server-rendered at
+         opacity 0 and only appeared after hydration. */
+      style={{ '--enter-y': '-28px', '--enter-delay': '0.05s' }}
     >
       <div className={styles.bar}>
         <a href={href('home')} className={styles.brand} aria-label={t.brand.homeLabel}>
@@ -77,7 +81,7 @@ export default function Header() {
                 <a
                   href={item.href}
                   className={styles.navLink}
-                  aria-current={currentState(item, active)}
+                      aria-current={currentState(item, active, pathname)}
                   onMouseEnter={() => setHovered(item.id)}
                   onFocus={() => setHovered(item.id)}
                   onBlur={() => setHovered(null)}
@@ -147,7 +151,7 @@ export default function Header() {
                     <a
                       href={item.href}
                       className={styles.menuLink}
-                      aria-current={currentState(item, active)}
+                  aria-current={currentState(item, active, pathname)}
                       onClick={closeMenu}
                     >
                       {item.label}
@@ -179,6 +183,6 @@ export default function Header() {
           </m.div>
         )}
       </AnimatePresence>
-    </m.header>
+    </header>
   );
 }

@@ -161,6 +161,14 @@ main:focus {
   unicode-bidi: isolate;
 }
 
+
+/*
+ * Honour the OS "reduce motion" setting for every animation and transition,
+ * including the hero entrance keyframes that live in Hero.module.css and
+ * Header.module.css. Collapsing duration and delay to a near-zero value means
+ * the elements settle on their final visible state on the first frame instead
+ * of being left stranded at opacity 0.
+ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -170,7 +178,20 @@ main:focus {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
+
+/*
+ * The above-the-fold entrance keyframes live next to the classes that use
+ * them (Hero.module.css and Header.module.css) because CSS Modules only
+ * rewrites animation-name to match @keyframes declared in the same file.
+ * The hero used to reveal itself through framer-motion, which meant the
+ * server shipped every headline, lead and badge with an inline `opacity: 0`
+ * and nothing became visible until the bundle had hydrated. A CSS animation
+ * starts at first paint, so the same choreography now completes in about a
+ * second with no JavaScript involved.
+ */
+
